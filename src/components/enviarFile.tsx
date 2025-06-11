@@ -104,7 +104,7 @@ export default function EnviarFile() {
       <div className="w-full p-[2px] rounded-2xl bg-gradient-to-r from-[#9C60DA] to-[#43A3D5]">
         <div className="bg-[#100D1E] rounded-2xl p-6 sm:p-10">
           <div className="flex justify-center mb-6">
-            <Image src="/compartilhe.svg" alt="Compartilhe" width={156} height={71} />
+            <Image src="/compartilhe.svg" alt="Compartilhe" width={156} height={71} className="relative bottom-18" />
           </div>
 
           {/* @ Instagram */}
