@@ -22,10 +22,7 @@ export default function GaleriaAdmin() {
       const res = await fetch("https://denzel-hero-backend.onrender.com/media");
       const data = await res.json();
       setMedia(data);
-      const preSelecionados = data
-        .filter((m: MediaItem) => m.highlight)
-        .map((m: MediaItem) => m.id);
-      setSelecionados(new Set(preSelecionados));
+     
     }
     fetchMedia();
   }, []);
