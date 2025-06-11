@@ -10,6 +10,8 @@ export default function Galeria() {
   const [verMais, setVerMais] = useState(false);
   const [selectedEvento, setSelectedEvento] = useState<evento | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
 
   const mediasFiltradas = selectedEvento
     ? highlightedMedia.filter((m) => m.evento === selectedEvento.title)
@@ -26,7 +28,22 @@ export default function Galeria() {
     setCurrentSlide((prev) =>
       prev === extraMedia.length - 1 ? 0 : prev + 1
     );
+  
+      const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.changedTouches[0].clientX);
+  };
 
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEndX(e.changedTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX - touchEndX > 50) {
+      nextSlide(); // Swipe esquerda
+    } else if (touchEndX - touchStartX > 50) {
+      prevSlide(); // Swipe direita
+    }
+  };
   useEffect(() => {
     async function fetchHighlighted() {
       try {
@@ -146,46 +163,50 @@ export default function Galeria() {
 
             {/* Carrossel de extras com mediasFiltradas */}
             {verMais && extraMedia.length > 0 && (
-              <div className="relative mt-4">
-                <div className="overflow-hidden">
-                  <div
-                    className="flex transition-transform duration-500"
-                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                  >
-                    {extraMedia.map((media) => (
-                      <div
-                        key={media.id}
-                        className="relative flex-shrink-0 w-full h-[340px] overflow-hidden"
-                      >
-                        <Image
-                          src={media.filepath}
-                          alt={`@${media.usuario_instagram}`}
-                          fill
-                          className="object-cover"
-                          unoptimized
-                        />
-                        <div className="absolute bottom-2 left-2 bg-gradient-to-r from-[#43A3D5] to-[#9C60DA] text-white text-xs px-2 py-0.5 rounded-full font-medium">
-                          @{media.usuario_instagram}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-[#1A172A] text-white p-2 rounded-full shadow-lg"
-                >
-                  ◀
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#1A172A] text-white p-2 rounded-full shadow-lg"
-                >
-                  ▶
-                </button>
-              </div>
-            )}
-
+  <div
+    className="relative mt-4"
+    onTouchStart={handleTouchStart}
+    onTouchMove={handleTouchMove}
+    onTouchEnd={handleTouchEnd}
+  >
+    <div className="overflow-hidden">
+      <div
+        className="flex transition-transform duration-500"
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+      >
+        {extraMedia.map((media) => (
+          <div
+            key={media.id}
+            className="relative flex-shrink-0 w-full h-[340px] overflow-hidden"
+          >
+            <Image
+              src={media.filepath}
+              alt={`@${media.usuario_instagram}`}
+              fill
+              className="object-cover"
+              unoptimized
+            />
+            <div className="absolute bottom-2 left-2 bg-gradient-to-r from-[#43A3D5] to-[#9C60DA] text-white text-xs px-2 py-0.5 rounded-full font-medium">
+              @{media.usuario_instagram}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <button
+      onClick={prevSlide}
+      className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-[#1A172A] text-white p-2 rounded-full shadow-lg"
+    >
+      ◀
+    </button>
+    <button
+      onClick={nextSlide}
+      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#1A172A] text-white p-2 rounded-full shadow-lg"
+    >
+      ▶
+    </button>
+  </div>
+)}
           </div>
         </div>
       </div>

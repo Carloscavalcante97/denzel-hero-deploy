@@ -1,4 +1,3 @@
-// components/EnviarFile.tsx
 "use client";
 
 import { useState } from "react";
@@ -46,6 +45,7 @@ export default function EnviarFile() {
       alert("Escolha uma festa.");
       return;
     }
+
     const formData = new FormData();
     files.forEach((f, i) => formData.append(`file${i + 1}`, f));
     formData.append(
@@ -55,6 +55,7 @@ export default function EnviarFile() {
         evento: selectedEvento.title,
       })
     );
+
     try {
       const res = await fetch(
         "https://denzel-hero-backend.onrender.com/upload",
@@ -73,11 +74,11 @@ export default function EnviarFile() {
   };
 
   return (
-    <div className="max-w-md px-4 py-6">
-      <div className="mx-auto  max-w-md p-1 rounded-2xl bg-gradient-to-r from-[#9C60DA] to-[#43A3D5]">
-        <div className="bg-[#100D1E] rounded-2xl p-6 sm:p-12">
+    <div className="w-full max-w-xl mx-auto px-4 py-6">
+      <div className="w-full p-[2px] rounded-2xl bg-gradient-to-r from-[#9C60DA] to-[#43A3D5]">
+        <div className="bg-[#100D1E] rounded-2xl p-6 sm:p-10">
           {/* Título */}
-          <div className="flex justify-center mb-6 relative bottom-15">
+          <div className="flex justify-center mb-6 relative bottom-22">
             <Image
               src="/compartilhe.svg"
               alt="Compartilhe"
@@ -86,21 +87,20 @@ export default function EnviarFile() {
             />
           </div>
 
-          {/* @ do Instagram */}
+          {/* Instagram */}
           <input
             type="text"
             placeholder="Digite aqui seu @"
-            className="block w-full mx-auto h-10 mb-4 px-4 bg-transparent border border-white/30 text-white text-sm rounded focus:outline-none"
             value={usuarioInstagram}
             onChange={(e) => setUsuarioInstagram(e.target.value)}
+            className="w-full h-10 mb-4 px-4 bg-transparent border border-white/30 text-white text-sm rounded focus:outline-none"
           />
 
-          {/* Escolher Festa */}
-
+          {/* Evento */}
           <EscolherFesta onSelect={setSelectedEvento} />
 
-          {/* Botões de anexar */}
-          <div className="flex flex-row items-center justify-between gap-4 mb-4">
+          {/* Anexar botões */}
+          <div className="flex items-center justify-between gap-4 mt-4 mb-6">
             <label htmlFor="file-upload" className="cursor-pointer">
               <Image
                 src="/anexarImagem.svg"
@@ -118,10 +118,8 @@ export default function EnviarFile() {
               />
             </label>
 
-            <label htmlFor="camera-upload" className="cursor-pointer ">
-              <div className=" flex items-center justify-start">
-                <Image src="/camera.svg" alt="Câmera" width={32} height={32} />
-              </div>
+            <label htmlFor="camera-upload" className="cursor-pointer">
+              <Image src="/camera.svg" alt="Câmera" width={32} height={32} />
               <input
                 id="camera-upload"
                 type="file"
@@ -134,7 +132,7 @@ export default function EnviarFile() {
             </label>
           </div>
 
-          {/* Termos */}
+          {/* Termos de uso */}
           <div className="flex items-center text-white text-sm mb-4">
             <input type="checkbox" id="aceite" className="mr-2" />
             <label htmlFor="aceite">
@@ -155,8 +153,8 @@ export default function EnviarFile() {
             </label>
           </div>
 
-          {/* Prévia */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+          {/* Galeria de pré-visualização */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-4">
             {previewUrls.map((url, i) => (
               <div key={i} className="relative w-full aspect-square">
                 <Image
@@ -167,7 +165,7 @@ export default function EnviarFile() {
                 />
                 <button
                   onClick={() => removerImagem(i)}
-                  className="absolute top-1 right-1 bg-black/50 rounded-full p-1"
+                  className="absolute top-1 right-1 bg-black/50 rounded-full p-1 text-white"
                 >
                   &times;
                 </button>
@@ -175,7 +173,7 @@ export default function EnviarFile() {
             ))}
           </div>
 
-          {/* Enviar */}
+          {/* Botão de enviar */}
           <button
             onMouseDown={() => setEnviandoAtivo(true)}
             onMouseUp={() => setEnviandoAtivo(false)}
@@ -187,7 +185,9 @@ export default function EnviarFile() {
           >
             <Image
               src={
-                enviandoAtivo ? "/enviarAnexoGradient.svg" : "/enviarAnexo.svg"
+                enviandoAtivo
+                  ? "/enviarAnexoGradient.svg"
+                  : "/enviarAnexo.svg"
               }
               alt="Enviar"
               width={174}
@@ -196,30 +196,27 @@ export default function EnviarFile() {
           </button>
         </div>
       </div>
+
+      {/* Modal de sucesso */}
       <SuccessModal open={modal} onClose={() => setModal(false)} />
+
+      {/* Modal de regras */}
       {mostrarRegras && (
         <ModalUso
           titulo="REGRAS"
           subtitulo="de uso"
-          texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+          texto="Lorem ipsum dolor sit amet..."
           icone="/regrasDeUso.svg"
           onClose={() => setMostrarRegras(false)}
         />
       )}
 
+      {/* Modal de termos */}
       {mostrarTermos && (
         <ModalUso
           titulo="TERMOS"
           subtitulo="de uso"
-          texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+          texto="Lorem ipsum dolor sit amet..."
           icone="/termosDeUso.svg"
           onClose={() => setMostrarTermos(false)}
         />
