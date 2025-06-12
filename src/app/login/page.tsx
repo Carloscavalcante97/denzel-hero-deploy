@@ -57,8 +57,7 @@ export default function LoginScreen() {
     backgroundRepeat: "no-repeat"
   }}
 >
-      {/* TOPO curvo com degradê */}
-  <Image
+<Image
   src="/fundoLoginSuperior.svg"
   alt="Fundo Login Superior"
   width={1920}
@@ -66,17 +65,20 @@ export default function LoginScreen() {
   className="w-full h-[150px] object-cover fixed top-0 left-0 z-10"
 />
 
-      {/* BASE curvada */}
-   
-       <div className="absolute inset-4 bg-[url('/loginBackground.svg')] bg-cover bg-center opacity-20 z-0" >
-       
-       <Image
+
+<Image
   src="/gerenciadorGaleria.svg"
   alt="Gerenciador de Galeria"
   width={220}
   height={40}
-  className="absolute top-[60px] left-1/2 -translate-x-1/2 z-10"
+  className="absolute top-[30px] left-1/2 -translate-x-1/2 z-20"
 />
+
+      {/* BASE curvada */}
+   
+       <div className="absolute inset-4 bg-[url('/loginBackground.svg')] bg-cover bg-center opacity-20 z-0" >
+       
+      
 
        </div>
       <div className="relative z-10 w-full max-w-xs text-center space-y-4 px-4">
@@ -88,7 +90,7 @@ export default function LoginScreen() {
           alt="Denzel Logo"
           width={130}
           height={36}
-          className="mx-auto mb-6"
+          className="mx-auto mb-6 relative "
         />
 
         <form onSubmit={handleSubmit} className="space-y-4">
