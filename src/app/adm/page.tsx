@@ -156,28 +156,44 @@ export default function GaleriaAdmin() {
                       )}>
                         <div className="bg-[#100D1E] rounded-[10px]">
                           <div
-                            className="flex items-center justify-between px-3 py-[6px] cursor-pointer"
-                            onClick={() => toggleAcordeon(key)}
-                          >
-                            <label className={classNames(
-                              "flex items-center gap-2 text-sm font-medium",
-                              all
-                                ? "bg-clip-text text-transparent bg-gradient-to-r from-[#43A3D5] to-[#9C60DA]"
-                                : "text-white"
-                            )} onClick={e => e.stopPropagation()}>
-                              <input
-                                type="checkbox"
-                                checked={all}
-                                onChange={e => { e.stopPropagation(); toggleTodosDoUsuario(ids); }}
-                                className="accent-[#9C60DA]"
-                              />
-                              @{usr}
-                            </label>
-                            <span className="text-white text-xs">{aberto ? "▲" : "▼"}</span>
-                          </div>
+  className="flex items-center justify-between px-4 py-[6px] cursor-pointer w-full max-w-sm mx-auto"
+  onClick={() => toggleAcordeon(key)}
+>
+  {/* Checkbox à esquerda */}
+  <input
+    type="checkbox"
+    checked={all}
+    onChange={(e) => {
+      e.stopPropagation();
+      toggleTodosDoUsuario(ids);
+    }}
+    onClick={(e) => e.stopPropagation()}
+    className="accent-[#9C60DA] mr-2"
+  />
+
+  {/* Nome centralizado */}
+  <div className="flex-1 text-center">
+    <span
+      className={classNames(
+        "text-sm font-medium",
+        all
+          ? "bg-clip-text text-transparent bg-gradient-to-r from-[#43A3D5] to-[#9C60DA]"
+          : "text-white"
+      )}
+    >
+      @{usr}
+    </span>
+  </div>
+
+  {/* Seta à direita */}
+  <span className="text-white text-xs">{aberto ? "▲" : "▼"}</span>
+</div>
+
+
+
 
                           {aberto && (
-                            <div className="flex flex-wrap gap-2 mt-3 justify-center sm:justify-start px-2 pb-2">
+                            <div className="flex flex-wrap gap-2 mt-3 justify-start sm:justify-start px-2 pb-2">
                               {imgs.map(img => (
                                 <div
                                   key={img.id}
