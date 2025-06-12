@@ -1,55 +1,36 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [credentials, setCredentials] = useState<{ email: string; password: string } | null>(null);
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const [user, setUser] = useState<any>(null);
   const router = useRouter();
 
-  // Credenciais para disparar o login
-  const [credentials, setCredentials] = useState<{
-    email: string;
-    password: string;
-  } | null>(null);
-
-  const [user, setUser] = useState<any>(null);
-  const [loginError, setLoginError] = useState<string | null>(null);
-
-
-
-  /**
-   * 2) Sempre que `credentials` mudar (cliente clicar em Entrar),
-   *    dispara o fetch para /login.
-   */
   useEffect(() => {
     if (!credentials) return;
-
     async function doLogin() {
       try {
-        const res = await fetch(
-          "https://denzel-hero-backend.onrender.com/login",
-          {
-            method: "POST",
-            credentials: "include", // garante envio do cookie HTTP-only
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: credentials?.email ?? "",
-              password: credentials?.password ?? "",
-            }),
-          }
-        );
+        const res = await fetch("https://denzel-hero-backend.onrender.com/login", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(credentials),
+        });
 
         const json = await res.json();
         if (!res.ok) {
           setLoginError(json.error || "Credenciais inválidas");
           setUser(null);
         } else {
-          // login ok: backend setou cookie, pegamos user do corpo
           setUser(json.user);
           setLoginError(null);
           router.push("/adm");
-        
         }
       } catch (err: any) {
         setLoginError(err.message || "Erro de rede");
@@ -60,52 +41,97 @@ export default function LoginScreen() {
     doLogin();
   }, [credentials]);
 
-  function handleSubmit(e: React.FormEvent) {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError(null);
     setCredentials({ email, password: senha });
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        type="email"
-        placeholder="Login"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full px-4 py-2 bg-transparent border rounded text-white placeholder-white/60 focus:outline-none focus:border-[#43A3D5]"
-        required
-      />
-      <input
-        type="password"
-        placeholder="Senha"
-        value={senha}
-        onChange={(e) => setSenha(e.target.value)}
-        className="w-full px-4 py-2 bg-transparent border rounded text-white placeholder-white/60 focus:outline-none focus:border-[#43A3D5]"
-        required
-      />
+   <div
+  className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-[#100D1E]"
+  style={{
+    backgroundImage: "url('/image 5.png')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat"
+  }}
+>
+      {/* TOPO curvo com degradê */}
+  <Image
+  src="/fundoLoginSuperior.svg"
+  alt="Fundo Login Superior"
+  width={1920}
+  height={150}
+  className="w-full h-[150px] object-cover fixed top-0 left-0 z-10"
+/>
 
-      {loginError && <p className="text-red-400 text-sm">{loginError}</p>}
+      {/* BASE curvada */}
+   
+       <div className="absolute inset-4 bg-[url('/loginBackground.svg')] bg-cover bg-center opacity-20 z-0" >
+       
+       <Image
+  src="/gerenciadorGaleria.svg"
+  alt="Gerenciador de Galeria"
+  width={220}
+  height={40}
+  className="absolute top-[60px] left-1/2 -translate-x-1/2 z-10"
+/>
 
-      <button
-        type="submit"
-        className="w-full py-2 bg-gradient-to-r from-[#43A3D5] to-[#9C60DA] rounded text-white font-medium transition-opacity hover:opacity-90"
-      >
-        Entrar
-      </button>
+       </div>
+      <div className="relative z-10 w-full max-w-xs text-center space-y-4 px-4">
+        {/* Logo topo */}
+        
 
-     {user ? (
-  <div className="p-3 border border-green-500 rounded text-green-300 text-sm bg-green-500/10">
-    ✅ Sessão ativa como <strong>{user.email}</strong>.<br />
-    Você está autenticado via cookie.
-  </div>
-) : (
-  <div className="p-3 border border-yellow-500 rounded text-yellow-300 text-sm bg-yellow-500/10">
-    ⚠️ Nenhuma sessão ativa detectada.<br />
-    Faça login para continuar.
-  </div>
-)}
+        <Image
+          src="/denzelLogo.svg"
+          alt="Denzel Logo"
+          width={130}
+          height={36}
+          className="mx-auto mb-6"
+        />
 
-    </form>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Login"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 bg-transparent border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:border-[#43A3D5]"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            className="w-full px-4 py-2 bg-transparent border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:border-[#43A3D5]"
+            required
+          />
+
+          {loginError && <p className="text-red-400 text-sm">{loginError}</p>}
+
+          <button
+            type="submit"
+            className="w-full flex items-center justify-center  hover:opacity-90 transition"
+          >
+            <Image src="/entrar.svg" alt="Entrar" width={134} height={40} />
+          </button>
+        </form>
+
+        {/* Esqueci Senha corrigido */}
+        <button className="flex items-center justify-center gap-2 text-white/80 text-sm hover:underline mt-2">
+          <Image src="/esqueciSenha.svg" alt="Chave" width={166} height={40} />
+     
+        </button>
+      </div>
+       <Image
+  src="/fundoLoginInferior.svg"
+  alt="Fundo Login Inferior"
+  width={1920}
+  height={150}
+  className="w-full h-[150px] object-cover fixed bottom-0 left-0 z-10"
+/>
+    </div>
   );
 }

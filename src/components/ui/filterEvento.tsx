@@ -31,7 +31,7 @@ export default function FilterEvento({ onSelect, eventoSelecionado }: FilterEven
   }, [open]);
 
   return (
-    <div className="relative w-full max-w-md">
+    <div className="relative w-full max-w-sm">
       <button
         onClick={() => setOpen((prev) => !prev)}
         className="w-full px-4 py-2 bg-[#1A172A] text-white text-center border border-[#2C2740] rounded-lg"
