@@ -36,7 +36,7 @@ export default function GaleriaAdmin() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [toDeleteIds, setToDeleteIds] = useState<number[]>([]);
   const [successDeleteOpen, setSuccessDeleteOpen] = useState(false);
-
+  const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
   // carrega media + eventos
   const fetchAll = async () => {
     const [mRes, eRes] = await Promise.all([
@@ -81,7 +81,7 @@ export default function GaleriaAdmin() {
     await fetch("https://denzel-hero-backend.onrender.com/media/highlight", {
       method: "PATCH",
       credentials: "include",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
       body: JSON.stringify({ ids }),
     });
     setSelecionados(new Set());

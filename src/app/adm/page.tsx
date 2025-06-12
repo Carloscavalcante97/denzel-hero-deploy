@@ -30,7 +30,7 @@ export default function GaleriaAdmin() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [toDeleteIds, setToDeleteIds] = useState<number[]>([]);
-
+  const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
   // busca inicial
   const fetchMedia = async () => {
     const res = await fetch("https://denzel-hero-backend.onrender.com/media");
@@ -82,14 +82,13 @@ export default function GaleriaAdmin() {
     await fetchMedia();
   };
 
-  // destaque
+  
   const definirDestaque = async () => {
     const ids = Array.from(selecionados);
     if (!ids.length) return;
     await fetch("https://denzel-hero-backend.onrender.com/media/highlight", {
       method: "PATCH",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
       body: JSON.stringify({ ids }),
     });
     setSelecionados(new Set());

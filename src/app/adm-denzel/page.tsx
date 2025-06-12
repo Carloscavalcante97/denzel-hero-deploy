@@ -24,7 +24,7 @@ export default function QuemSomosPage() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
-
+  const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
   const load = async () => {
     try {
       const res = await fetch("https://denzel-hero-backend.onrender.com/denzelmedia", {
@@ -68,7 +68,7 @@ export default function QuemSomosPage() {
     try {
       const res = await fetch("https://denzel-hero-backend.onrender.com/denzelmedia", {
         method: "POST",
-        credentials: "include",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         body: formData,
       });
 

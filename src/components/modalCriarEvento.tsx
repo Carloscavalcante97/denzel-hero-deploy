@@ -21,7 +21,8 @@ export default function ModalCriarEvento({
   const [loading, setLoading] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
+  const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
+  
   useEffect(() => {
     if (open) {
       setTitle("");
@@ -44,7 +45,7 @@ export default function ModalCriarEvento({
         {
           method: "POST",
           credentials: "include",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
           body: JSON.stringify({ title: title.trim() }),
         }
       );

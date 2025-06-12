@@ -21,6 +21,7 @@ export default function ModalConfirmDelete({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successOpen, setSuccessOpen] = useState(false);
+  const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
 
   // limpa estado de erro / success quando reabre
   useEffect(() => {
@@ -39,8 +40,7 @@ export default function ModalConfirmDelete({
     try {
       const res = await fetch("https://denzel-hero-backend.onrender.com/media", {
         method: "DELETE",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         body: JSON.stringify({ ids }),
       });
       if (!res.ok) {
