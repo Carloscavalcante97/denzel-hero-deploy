@@ -122,10 +122,10 @@ export default function LoginScreen() {
         </form>
 
         {/* Esqueci Senha corrigido */}
-        <button className="flex items-center justify-center gap-2 text-white/80 text-sm hover:underline mt-2">
-          <Image src="/esqueciSenha.svg" alt="Chave" width={166} height={40} />
-     
-        </button>
+        <button className="block mx-auto flex items-center justify-center gap-2 text-white/80 text-sm hover:underline mt-2">
+  <Image src="/esqueciSenha.svg" alt="Chave" width={166} height={40} />
+</button>
+
       </div>
        <Image
   src="/fundoLoginInferior.svg"
