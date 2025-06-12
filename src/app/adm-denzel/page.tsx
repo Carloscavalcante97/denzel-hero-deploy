@@ -28,7 +28,7 @@ export default function QuemSomosPage() {
   const load = async () => {
     try {
       const res = await fetch("https://denzel-hero-backend.onrender.com/denzelmedia", {
-        credentials: "include"
+        headers: { "Authorization": `Bearer ${token}` }
       });
       const data: QuemSomosItem[] = await res.json();
       setItems(data);
