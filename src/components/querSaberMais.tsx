@@ -17,7 +17,7 @@ export default function QuerSaberMais() {
         {/* Botão Instagram */}
         <div className="flex justify-center mt-6">
           <a
-            href="https://instagram.com/seuPerfil"
+            href="https://instagram.com/denzeleventos"
             target="_blank"
             rel="noopener noreferrer"
             className="
