@@ -33,36 +33,44 @@ export default function ModalCriarEvento({
   }, [open]);
 
   const handleCreate = async () => {
-    if (!title.trim()) {
-      setError("O nome do evento não pode ficar vazio.");
-      return;
-    }
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(
-        "https://denzel-hero-backend.onrender.com/eventos",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-          body: JSON.stringify({ title: title.trim() }),
-        }
-      );
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "Falha ao criar evento");
+  setLoading(true);
+  setError(null);
+
+  try {
+    const res = await fetch(
+      "https://denzel-hero-backend.onrender.com/eventos",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ title: title.trim() }),
       }
-      // sucesso: abre o modal de confirmação
-      setSuccessOpen(true);
-      if (onSuccessRefresh) onSuccessRefresh();
-      // NÃO fecha imediatamente o modal de criação
-    } catch (err: any) {
-      console.error(err);
-      setError(err.message || "Erro ao criar evento");
-    } finally {
-      setLoading(false);
+    );
+
+    const text = await res.text();
+    let json;
+    try {
+      json = JSON.parse(text);
+    } catch {
+      throw new Error(`Resposta inválida do servidor:\n${text}`);
     }
-  };
+
+    if (!res.ok) {
+      throw new Error(json.error || "Falha ao criar evento");
+    }
+
+    setSuccessOpen(true);
+    onSuccessRefresh?.();
+  } catch (err: any) {
+    console.error(err);
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <>
