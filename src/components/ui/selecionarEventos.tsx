@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 interface evento {
+  date: Date;
   title: string;
   // outros campos, se houver
 }

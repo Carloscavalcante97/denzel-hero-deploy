@@ -71,7 +71,7 @@ export default function Galeria() {
             }`}
           >
             {/* Botão de filtro */}
-            <FilterEvento onSelect={(evento) => setSelectedEvento(evento)} />
+            <FilterEvento onSelect={(evento) => setSelectedEvento({ title: evento.title, date: evento.date })} />
 
             {/* Título dinâmico */}
             <div className="text-center mb-3 mt-6">
