@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 
@@ -43,7 +44,8 @@ export default function FilterEvento({ onSelect }: FilterEventoProps) {
           onClick={() => setOpen((o) => !o)}
           className="flex items-center justify-center gap-2 w-[220px] px-4 py-1 text-sm text-white bg-[#1A172A] rounded-full"
         >
-          ▶ Filtrar Evento
+          <Image src="/play.svg" alt="Filtrar Evento" width={13} height={14} />
+          {eventos.length > 0 ? "Filtrar Evento" : "Carregando eventos..."}
         </button>
       </div>
 

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Evento {
   title: string;
@@ -33,11 +34,18 @@ export default function FilterEvento({ onSelect, eventoSelecionado }: FilterEven
   return (
     <div className="relative w-full max-w-sm">
       <button
-        onClick={() => setOpen((prev) => !prev)}
-        className="w-full px-4 py-2 bg-[#1A172A] text-white text-center border border-[#2C2740] rounded-lg"
-      >
-        {eventoSelecionado ? ` ${eventoSelecionado}` : "▶ Filtrar Evento"}
-      </button>
+  onClick={() => setOpen((prev) => !prev)}
+  className="w-full px-4 py-2 bg-[#1A172A] text-white text-center border border-[#2C2740] rounded-lg"
+>
+  {eventoSelecionado ? (
+    ` ${eventoSelecionado}`
+  ) : (
+    <>
+      <Image src="/play.svg" alt="Filtrar Evento" width={13} height={14} />
+      <span className="ml-2">Escolher Evento</span>
+    </>
+  )}
+</button>
 
       {open && (
         <div className="absolute z-50 mt-2 w-full bg-[#1A172A] border border-[#2C2740] rounded-lg shadow-lg p-2 max-h-60 overflow-y-auto">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 
 interface EscolherFestaProps {
@@ -37,12 +38,19 @@ export default function EscolherFesta({ onSelect }: EscolherFestaProps) {
 
   return (
     <div >
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="w-full h-[40px] flex items-center gap-2 justify-center mb-3 px-4 py-2 border border-white/30 rounded-md text-white text-sm bg-transparent relative "
-      >
-        <span className="text-lg">▶</span> {eventoSelecionado || "Escolher Festa"}
-      </button>
+     <button
+  onClick={() => setOpen((o) => !o)}
+  className="w-full h-[40px] flex items-center gap-2 justify-center mb-3 px-4 py-2 border border-white/30 rounded-md text-white text-sm bg-transparent relative"
+>
+  {eventoSelecionado ? (
+    <span className="text-sm">{eventoSelecionado}</span>
+  ) : (
+    <>
+      <Image src="/play.svg" alt="Filtrar Evento" width={13} height={14} />
+      <span className="text-sm">Escolher Festa</span>
+    </>
+  )}
+</button>
 
       {open && (
         <div className="mt-2 bg-[#1A172A] rounded-lg shadow-lg p-4 max-h-64 overflow-y-auto">

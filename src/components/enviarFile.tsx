@@ -114,7 +114,7 @@ export default function EnviarFile() {
             placeholder="Digite aqui seu @"
             value={usuarioInstagram}
             onChange={e => setUsuarioInstagram(e.target.value)}
-            className="w-full h-10 mb-4 px-4 bg-transparent border border-white/30 text-white text-sm rounded focus:outline-none"
+            className="w-full h-10 mb-4 px-4 bg-transparent border border-white/30 text-white text-sm rounded focus:outline-none text-center"
           />
 
           {/* Selecionar Evento */}
@@ -188,7 +188,7 @@ export default function EnviarFile() {
             onTouchEnd={() => setEnviandoAtivo(false)}
             onClick={enviarImagens}
             disabled={enviando}
-            className="w-full flex justify-center mt-2 disabled:opacity-50"
+            className="w-full flex justify-center mt-2 disabled:opacity-50 relative top-11"
           >
             <Image
               src={enviandoAtivo ? "/enviarAnexoGradiente.svg" : "/enviarAnexo.svg"}
