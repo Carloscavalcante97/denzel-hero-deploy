@@ -41,23 +41,20 @@ export default function FilterEvento({ onSelect }: FilterEventoProps) {
   return (
     <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-[220px] z-30">
       <div className="p-[1.5px] rounded-full bg-gradient-to-r w-[224px] from-[#9C60DA] to-[#43A3D5]">
-        <button
-          onClick={() => setOpen((o) => !o)}
-          className="flex items-center justify-center gap-2 w-[220px] px-4 py-1 text-sm text-white bg-[#1A172A] rounded-full"
-        >
-          {eventoSelecionado ? (
-            <span>{eventoSelecionado}</span>
-          ) : (
-            <>
-              <Image src="/play.svg" alt="Filtrar Evento" width={13} height={14} />
-              {eventos.length > 0 ? (
-                <span>Filtrar Evento</span>
-              ) : (
-                <span>Carregando eventos...</span>
-              )}
-            </>
-          )}
-        </button>
+       <button
+  onClick={() => setOpen((o) => !o)}
+  className="flex items-center justify-center gap-2 w-[220px] px-4 py-1 text-sm text-white bg-[#1A172A] rounded-full"
+>
+  {eventoSelecionado ? (
+    <span>{eventoSelecionado}</span>
+  ) : (
+    <>
+      <Image src="/play.svg" alt="Filtrar Evento" width={13} height={14} />
+      <span>Filtrar Evento</span>
+    </>
+  )}
+</button>
+
       </div>
 
       {open && (
