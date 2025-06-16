@@ -103,7 +103,7 @@ export default function Galeria() {
                       unoptimized
                     />
                     <div className="absolute bottom-2 left-2 bg-[#43A3D5] text-white text-xs font-semibold px-2 py-0.5 rounded-full">
-                      @{media.usuario_instagram}
+                      {media.usuario_instagram}
                     </div>
                   </div>
                 ))}
