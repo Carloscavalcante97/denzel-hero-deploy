@@ -121,7 +121,7 @@ export default function Galeria() {
                         unoptimized
                       />
                       <div className="absolute bottom-1 left-1 bg-[#6E3CB2] text-white text-[10px] font-semibold px-1.5 py-[1px] rounded-full truncate max-w-[90%]">
-                        @{media.usuario_instagram}
+                        {media.usuario_instagram}
                       </div>
                     </div>
                   ))}
@@ -137,7 +137,7 @@ export default function Galeria() {
                       unoptimized
                     />
                     <div className="absolute bottom-1 left-1 bg-[#6E3CB2] text-white text-[10px] font-semibold px-2 py-[1px] rounded-full truncate max-w-[90%]">
-                      @{mediasFiltradas[4].usuario_instagram}
+                      {mediasFiltradas[4].usuario_instagram}
                     </div>
                   </div>
                 )}
@@ -153,7 +153,7 @@ export default function Galeria() {
                         unoptimized
                       />
                       <div className="absolute bottom-1 left-1 bg-[#6E3CB2] text-white text-[10px] font-semibold px-1.5 py-[1px] rounded-full truncate max-w-[90%]">
-                        @{media.usuario_instagram}
+                        {media.usuario_instagram}
                       </div>
                     </div>
                   ))}
@@ -187,7 +187,7 @@ export default function Galeria() {
               unoptimized
             />
             <div className="absolute bottom-2 left-2 bg-gradient-to-r from-[#43A3D5] to-[#9C60DA] text-white text-xs px-2 py-0.5 rounded-full font-medium">
-              @{media.usuario_instagram}
+              {media.usuario_instagram}
             </div>
           </div>
         ))}
