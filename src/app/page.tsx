@@ -22,7 +22,7 @@ export default function Home() {
         {/* Título com gradiente */}
         <div className="w-full text-center mb-6">
           <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#43A3D5] to-[#9C60DA] font-bold text-xl leading-snug">
-            <strong>E AÍ!</strong> <br /> ONDE VC TAVA?
+            <strong>POSTE SEUS MELHORES</strong> <br /> MOMENTOS!!
           </h1>
         </div>
 
