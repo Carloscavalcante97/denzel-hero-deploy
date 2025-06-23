@@ -15,7 +15,7 @@ export default function ContactForm() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://denzel-hero-backend.onrender.com/send-email", {
+      const res = await fetch("https://denzel-hero-deploy.onrender.com/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
