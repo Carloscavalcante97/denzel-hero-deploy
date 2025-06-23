@@ -20,7 +20,7 @@ export default function DetalheImagemPage() {
   useEffect(() => {
     async function fetchImagem() {
       try {
-        const res = await fetch(`https://denzel-hero-backend.onrender.com/media/${id}`);
+        const res = await fetch(`https://denzel-hero-deploy.onrender.com/media/${id}`);
         const data = await res.json();
         setImagem(data);
       } catch (error) {
