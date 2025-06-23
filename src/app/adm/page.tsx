@@ -33,7 +33,7 @@ export default function GaleriaAdmin() {
   const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
   // busca inicial
   const fetchMedia = async () => {
-    const res = await fetch("https://denzel-hero-backend.onrender.com/media");
+    const res = await fetch("https://denzel-hero-deploy.onrender.com/media");
     const data: MediaItem[] = await res.json();
     setMedia(data);
   };
