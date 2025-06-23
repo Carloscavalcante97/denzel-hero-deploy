@@ -20,7 +20,7 @@ export default function FilterEvento({ onSelect, eventoSelecionado }: FilterEven
 
     async function fetchEventos() {
       try {
-        const res = await fetch("https://denzel-hero-backend.onrender.com/eventos");
+        const res = await fetch("https://denzel-hero-deploy.onrender.com/eventos");
         const data: Evento[] = await res.json();
         setEventos(data);
       } catch (err) {
