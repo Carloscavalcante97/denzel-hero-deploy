@@ -86,7 +86,7 @@ export default function GaleriaAdmin() {
   const definirDestaque = async () => {
     const ids = Array.from(selecionados);
     if (!ids.length) return;
-    await fetch("https://denzel-hero-backend.onrender.com/media/highlight", {
+    await fetch("https://denzel-hero-deploy.onrender.com/media/highlight", {
       method: "PATCH",
       headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
       body: JSON.stringify({ ids }),
