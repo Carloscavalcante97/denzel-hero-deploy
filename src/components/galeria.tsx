@@ -48,7 +48,7 @@ export default function Galeria() {
     async function fetchHighlighted() {
       try {
         const res = await fetch(
-          "https://denzel-hero-backend.onrender.com/highlighted"
+          "https://denzel-hero-deploy.onrender.com/highlighted"
         );
         const data: highlighted[] = await res.json();
         setHighlightedMedia(data);
