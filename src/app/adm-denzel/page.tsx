@@ -66,7 +66,7 @@ export default function QuemSomosPage() {
 
     setUploading(true);
     try {
-      const res = await fetch("https://denzel-hero-backend.onrender.com/denzelmedia", {
+      const res = await fetch("https://denzel-hero-deploy.onrender.com/denzelmedia", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         body: formData,
