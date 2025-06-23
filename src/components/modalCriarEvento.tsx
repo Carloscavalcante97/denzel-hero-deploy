@@ -38,7 +38,7 @@ export default function ModalCriarEvento({
 
   try {
     const res = await fetch(
-      "https://denzel-hero-backend.onrender.com/eventos",
+      "https://denzel-hero-deploy.onrender.com/eventos",
       {
         method: "POST",
         headers: {
