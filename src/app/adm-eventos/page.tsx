@@ -41,8 +41,8 @@ export default function GaleriaAdmin() {
   // carrega media + eventos
   const fetchAll = async () => {
     const [mRes, eRes] = await Promise.all([
-      fetch("https://denzel-hero-backend.onrender.com/media"),
-      fetch("https://denzel-hero-backend.onrender.com/eventos"),
+      fetch("https://denzel-hero-deploy.onrender.com/media"),
+      fetch("https://denzel-hero-deploy.onrender.com/eventos"),
     ]);
     setMedia(await mRes.json());
     setEventos(await eRes.json());
@@ -79,7 +79,7 @@ export default function GaleriaAdmin() {
   const definirDestaque = async () => {
     const ids = Array.from(selecionados);
     if (!ids.length) return;
-    await fetch("https://denzel-hero-backend.onrender.com/media/highlight", {
+    await fetch("https://denzel-hero-deploy.onrender.com/media/highlight", {
       method: "PATCH",
       credentials: "include",
       headers: {
