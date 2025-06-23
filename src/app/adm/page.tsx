@@ -180,7 +180,7 @@ export default function GaleriaAdmin() {
           : "text-white"
       )}
     >
-      @{usr}
+      {usr}
     </span>
   </div>
 
