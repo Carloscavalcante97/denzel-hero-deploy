@@ -19,7 +19,7 @@ export default function LoginScreen() {
     async function doLogin() {
       try {
         const res = await fetch(
-          "https://denzel-hero-backend.onrender.com/login",
+          "https://denzel-hero-deploy.onrender.com/login",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
