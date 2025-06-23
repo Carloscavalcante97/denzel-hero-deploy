@@ -18,7 +18,7 @@ export default function EscolherFesta({ onSelect }: EscolherFestaProps) {
 
     async function fetchEventos() {
       try {
-        const res = await fetch("https://denzel-hero-backend.onrender.com/eventos", {
+        const res = await fetch("https://denzel-hero-deploy.onrender.com/eventos", {
           method: "GET",
           headers: {
             "Content-Type": "application/json"
