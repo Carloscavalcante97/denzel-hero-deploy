@@ -27,7 +27,7 @@ export default function QuemSomosPage() {
   const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
   const load = async () => {
     try {
-      const res = await fetch("https://denzel-hero-backend.onrender.com/denzelmedia", {
+      const res = await fetch("https://denzel-hero-deploy.onrender.com/denzelmedia", {
         headers: { "Authorization": `Bearer ${token}` }
       });
       const data: QuemSomosItem[] = await res.json();
