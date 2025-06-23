@@ -16,7 +16,7 @@ export default function QuemSomosCarousel() {
 
   const fetchImages = async () => {
     try {
-      const res = await fetch("https://denzel-hero-backend.onrender.com/denzelmedia", {
+      const res = await fetch("https://denzel-hero-deploy.onrender.com/denzelmedia", {
         credentials: "include"
       });
       const data = await res.json();
