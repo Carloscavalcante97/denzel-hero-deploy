@@ -38,7 +38,7 @@ export default function ModalConfirmDelete({
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("https://denzel-hero-backend.onrender.com/media", {
+      const res = await fetch("https://denzel-hero-deploy.onrender.com/media", {
         method: "DELETE",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         body: JSON.stringify({ ids }),
