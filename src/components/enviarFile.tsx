@@ -81,7 +81,7 @@ export default function EnviarFile() {
         evento: selectedEvento!.title,
       }));
 
-      const res = await fetch("https://denzel-hero-backend.onrender.com/upload", {
+      const res = await fetch("https://denzel-hero-deploy.onrender.com/upload", {
         method: "POST",
         body: formData,
       });
